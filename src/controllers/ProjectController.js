@@ -53,7 +53,6 @@ module.exports = {
       .where({ id })
       .andWhere({ user_id })
       .update({ title })
-     
 
       return res.send()
     } catch(err) {
@@ -61,5 +60,21 @@ module.exports = {
     }
 
   },
+
+  async delete(req, res, next) {
+    try {
+      const { user_id } = req.headers;
+      const { id } = req.params;
+
+      await knex('projects')
+      .where({ id })
+      .andWhere({ user_id })
+      .del();
+
+      return res.send();
+    } catch(err) {
+      next(err);
+    }
+  }
    
 }
