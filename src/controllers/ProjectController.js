@@ -42,5 +42,24 @@ module.exports = {
       next(err)
     }
   },
+
+  async update(req, res, next) {
+    try {
+      const { user_id } = req.headers;
+      const { id } = req.params;
+      const { title } = req.body;
+
+      await knex('projects')
+      .where({ id })
+      .andWhere({ user_id })
+      .update({ title })
+     
+
+      return res.send()
+    } catch(err) {
+      next(err)
+    }
+
+  },
    
 }
